@@ -1,0 +1,119 @@
+<style>
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("mos-design-kmBIFUOBWYI-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  padding: 20px;
+}
+
+form {
+  background-color: rgba(41, 40, 40, 0.6); /* yarim shaffof fon */
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  color: white;
+  backdrop-filter: blur(4px); /* fonni blur qilish */
+  transition: transform 0.3s ease;
+}
+
+form:hover {
+  transform: scale(1.02); /* hover effekti */
+}
+
+input, button {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border: 2px solid #00f0ff;
+  background-color: #f0f0f0;
+  color: black;
+}
+
+button {
+  background-color: rgb(103, 102, 114);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.3s ease;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+button:active {
+  animation: pulse 0.2s;
+  background-color: rgb(80, 79, 90);
+}
+button:hover {
+  background-color: rgb(20, 154, 53);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+
+</style>
+<div class="form-container">
+  <form>
+    <label for="name">Log In:</label>
+    <input type="text" id="shox" placeholder="Input username or email" />
+
+    <label for="Password">Password:</label>
+    <input type="password" id="777" placeholder="Password" />
+
+    <button type="submit">SEND</button>
+  </form>
+</div>
+
+
+<script>
+    const form = document.getElementById("myForm");
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const errorMsg = document.getElementById("errorMsg");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // Sahifa yangilanmasin
+
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+      
+      // Ism yoki email bo'sh bo'lsa
+      if (name === "" || email === "") {
+        errorMsg.textContent = "Iltimos, barcha maydonlarni to‘ldiring.";
+      } 
+      // Emailni tekshirish
+      else if (!validateEmail(email)) {
+        errorMsg.textContent = "Iltimos, to‘g‘ri email manzilini kiriting.";
+      } 
+      else {
+        errorMsg.textContent = "";
+        alert("Forma muvaffaqiyatli yuborildi!");
+        form.reset(); // Forma tozalanadi
+      }
+    });
+
+    // Emailni tekshirish uchun funksiya
+    function validateEmail(email) {
+      const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return re.test(String(email).toLowerCase());
+    }
+  </script>
+</body>
+</html>

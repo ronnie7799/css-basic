@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forma Validatsiyasi</title>
+  <style>
+    .form-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #222;
+      font-family: sans-serif;
+    }
+
+    form {
+      background-color: #333;
+      color: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, button {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      background-color: royalblue;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: darkblue;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <form id="myForm">
+      <label for="name">Ism:</label>
+      <input type="text" id="name" />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" />
+
+      <p class="error" id="errorMsg"></p>
+
+      <button type="submit">Jo'natish</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("myForm");
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const errorMsg = document.getElementById("errorMsg");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // Sahifa yangilanmasin
+
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+      
+      // Ism yoki email bo'sh bo'lsa
+      if (name === "" || email === "") {
+        errorMsg.textContent = "Iltimos, barcha maydonlarni to‘ldiring.";
+      } 
+      // Emailni tekshirish
+      else if (!validateEmail(email)) {
+        errorMsg.textContent = "Iltimos, to‘g‘ri email manzilini kiriting.";
+      } 
+      else {
+        errorMsg.textContent = "";
+        alert("Forma muvaffaqiyatli yuborildi!");
+        form.reset(); // Forma tozalanadi
+      }
+    });
+
+    // Emailni tekshirish uchun funksiya
+    function validateEmail(email) {
+      const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return re.test(String(email).toLowerCase());
+    }
+  </script>
+</body>
+</html>
